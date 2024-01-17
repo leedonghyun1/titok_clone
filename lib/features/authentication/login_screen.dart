@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:titok_clone/constants/gaps.dart';
 import 'package:titok_clone/constants/sizes.dart';
+import 'package:titok_clone/features/authentication/login_forms_screen.dart';
 import 'package:titok_clone/features/authentication/widgets/auth_button.dart';
 
 class LogInScreen extends StatelessWidget {
@@ -12,18 +13,26 @@ class LogInScreen extends StatelessWidget {
         .pop(); // Stack 쌓여 있는 제일 상위 Screen을 없애기 위해서 push가 아닌 pop 사용
   }
 
+  void _onEmailLoginTap(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const LoginFormScreen(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: const SafeArea(
+      body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(
+          padding: const EdgeInsets.symmetric(
             horizontal: Sizes.size40,
           ),
           child: Column(
             children: [
               Gaps.v80,
-              Text(
+              const Text(
                 'Login In to TikTok',
                 style: TextStyle(
                   fontSize: Sizes.size28,
@@ -31,7 +40,7 @@ class LogInScreen extends StatelessWidget {
                 ),
               ),
               Gaps.v20,
-              Text(
+              const Text(
                 'Manage your account, check notifications, comment on videos, and more.',
                 style: TextStyle(
                   fontSize: Sizes.size16,
@@ -40,14 +49,17 @@ class LogInScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               Gaps.v40,
-              AuthButton(
-                text: 'Use email & password',
-                icon: Icon(
-                  CupertinoIcons.person,
+              GestureDetector(
+                onTap: () => _onEmailLoginTap(context),
+                child: const AuthButton(
+                  text: 'Use email & password',
+                  icon: Icon(
+                    CupertinoIcons.person,
+                  ),
                 ),
               ),
               Gaps.v16,
-              AuthButton(
+              const AuthButton(
                 text: 'Continue with Apple',
                 icon: Icon(
                   CupertinoIcons.airplane,
