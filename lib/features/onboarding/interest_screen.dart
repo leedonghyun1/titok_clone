@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:titok_clone/constants/gaps.dart';
 import 'package:titok_clone/constants/sizes.dart';
+import 'package:titok_clone/features/onboarding/tutorial_screen.dart';
 import 'package:titok_clone/features/onboarding/widgets/interest_button.dart';
 
 const interests = [
@@ -83,6 +84,15 @@ class _InterestsScreenState extends State<InterestsScreen> {
     super.dispose();
   }
 
+  void _onNextTap() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const TutorialScreen(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -152,20 +162,23 @@ class _InterestsScreenState extends State<InterestsScreen> {
             left: Sizes.size24,
             right: Sizes.size24,
           ),
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(
-                Sizes.size5,
+          child: GestureDetector(
+            onTap: _onNextTap,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(
+                  Sizes.size5,
+                ),
+                color: Theme.of(context).primaryColor,
               ),
-              color: Theme.of(context).primaryColor,
-            ),
-            child: const Center(
-              child: Text(
-                'Next',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: Sizes.size20,
+              child: const Center(
+                child: Text(
+                  'Next',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: Sizes.size20,
+                  ),
                 ),
               ),
             ),
