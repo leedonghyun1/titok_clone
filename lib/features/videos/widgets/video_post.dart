@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:titok_clone/constants/gaps.dart';
 import 'package:titok_clone/constants/sizes.dart';
+import 'package:titok_clone/features/videos/widgets/video_button.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
@@ -45,7 +47,9 @@ class _VideoPostState extends State<VideoPost>
   void _initVideoPlayer() async {
     // 호출 한다고 바로 불러와지지 않기 때문에 비동기 방식 async - await
     await _videoPlayerController.initialize();
-
+    // If video will be finishted do not go to forwarnd.
+    // Video looping when video is finishing.
+    await _videoPlayerController.setLooping(true);
     setState(() {});
     _videoPlayerController.addListener(_onVideoChange);
   }
@@ -63,9 +67,6 @@ class _VideoPostState extends State<VideoPost>
       value: 1.5,
       duration: _animationDuration,
     );
-    _animationController.addListener(() {
-      setState(() {});
-    });
   }
 
   @override
@@ -120,8 +121,14 @@ class _VideoPostState extends State<VideoPost>
           Positioned.fill(
             child: IgnorePointer(
               child: Center(
-                child: Transform.scale(
-                  scale: _animationController.value,
+                child: AnimatedBuilder(
+                  animation: _animationController,
+                  builder: (context, child) {
+                    return Transform.scale(
+                      scale: _animationController.value,
+                      child: child,
+                    );
+                  },
                   child: AnimatedOpacity(
                     opacity: _isPaused ? 1 : 0,
                     duration: _animationDuration,
@@ -133,6 +140,65 @@ class _VideoPostState extends State<VideoPost>
                   ),
                 ),
               ),
+            ),
+          ),
+          const Positioned(
+            bottom: 30,
+            left: 30,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '@Donghyun',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w900,
+                    fontSize: Sizes.size16,
+                  ),
+                ),
+                Gaps.v16,
+                Text(
+                  'This is Shinsegae Dept Store at Chirtsmas!',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                    fontSize: Sizes.size12,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Positioned(
+            bottom: 30,
+            right: 10,
+            child: Column(
+              children: [
+                CircleAvatar(
+                  radius: 25,
+                  foregroundImage: NetworkImage(
+                    'https://avatars.githubusercontent.com/u/11994918?v=4',
+                  ),
+                  child: Text('AT'),
+                ),
+                Gaps.v16,
+                VideoButton(
+                  icon: FontAwesomeIcons.solidHeart,
+                  text: '2.9M',
+                  color: Colors.white70,
+                ),
+                Gaps.v16,
+                VideoButton(
+                  icon: FontAwesomeIcons.solidComment,
+                  text: '3.3K',
+                  color: Colors.white70,
+                ),
+                Gaps.v16,
+                VideoButton(
+                  icon: FontAwesomeIcons.share,
+                  text: 'Share',
+                  color: Colors.white70,
+                ),
+              ],
             ),
           ),
         ],
