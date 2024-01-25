@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:titok_clone/constants/gaps.dart';
+import 'package:titok_clone/constants/sizes.dart';
 
 class VideoComments extends StatefulWidget {
   const VideoComments({super.key});
@@ -8,8 +11,135 @@ class VideoComments extends StatefulWidget {
 }
 
 class _VideoCommentsState extends State<VideoComments> {
+  void _onClosePressed() {
+    Navigator.of(context).pop();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    final size = MediaQuery.of(context).size;
+
+    return Container(
+      height: size.height * 0.7,
+      clipBehavior: Clip.hardEdge,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(
+          Sizes.size14,
+        ),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.grey.shade50,
+        appBar: AppBar(
+          backgroundColor: Colors.grey.shade50,
+          automaticallyImplyLeading: false,
+          title: const Text(
+            '22797 Comments',
+          ),
+          actions: [
+            IconButton(
+              onPressed: _onClosePressed,
+              icon: const FaIcon(
+                FontAwesomeIcons.xmark,
+              ),
+            ),
+          ],
+        ),
+        body: Stack(
+          children: [
+            ListView.separated(
+              padding: const EdgeInsets.symmetric(
+                vertical: Sizes.size10,
+                horizontal: Sizes.size16,
+              ),
+              separatorBuilder: (context, index) => Gaps.v20,
+              itemCount: 10,
+              itemBuilder: (context, index) => Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const CircleAvatar(
+                    radius: 18,
+                    child: Text('DH'),
+                  ),
+                  Gaps.h10,
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Donghyun',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: Sizes.size14,
+                              color: Colors.grey.shade500),
+                        ),
+                        Gaps.v5,
+                        const Text(
+                          'Thats very sound good idea!Thats very sound good idea!Thats very sound good idea!',
+                        ),
+                      ],
+                    ),
+                  ),
+                  Gaps.h10,
+                  Column(
+                    children: [
+                      FaIcon(
+                        FontAwesomeIcons.heart,
+                        size: Sizes.size20,
+                        color: Colors.grey.shade500,
+                      ),
+                      Gaps.v2,
+                      Text(
+                        '52.2K',
+                        style: TextStyle(
+                          color: Colors.grey.shade500,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            Positioned(
+              bottom: 0,
+              width: size.width,
+              child: BottomAppBar(
+                color: Colors.white,
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      radius: 18,
+                      backgroundColor: Colors.grey.shade500,
+                      foregroundColor: Colors.white,
+                      child: const Text('DH'),
+                    ),
+                    Gaps.h10,
+                    Expanded(
+                      child: TextField(
+                        cursorColor: Theme.of(context).primaryColor,
+                        decoration: InputDecoration(
+                          hintText: "Write a comment...",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(
+                              Sizes.size12,
+                            ),
+                            borderSide: BorderSide.none,
+                          ),
+                          filled: true,
+                          fillColor: Colors.grey.shade300,
+                          contentPadding: const EdgeInsets.symmetric(
+                            vertical: Sizes.size10,
+                            horizontal: Sizes.size12,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
