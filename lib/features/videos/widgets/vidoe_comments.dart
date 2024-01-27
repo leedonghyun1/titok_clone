@@ -12,6 +12,10 @@ class VideoComments extends StatefulWidget {
 
 class _VideoCommentsState extends State<VideoComments> {
   bool _isWriting = false;
+
+  //Scrollbar Controller
+  final ScrollController _scrollController = ScrollController();
+
   void _onClosePressed() {
     Navigator.of(context).pop();
   }
@@ -62,57 +66,63 @@ class _VideoCommentsState extends State<VideoComments> {
           onTap: _stopWriting,
           child: Stack(
             children: [
-              ListView.separated(
-                padding: const EdgeInsets.symmetric(
-                  vertical: Sizes.size10,
-                  horizontal: Sizes.size16,
-                ),
-                separatorBuilder: (context, index) => Gaps.v20,
-                itemCount: 10,
-                itemBuilder: (context, index) => Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const CircleAvatar(
-                      radius: 18,
-                      child: Text('DH'),
-                    ),
-                    Gaps.h10,
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+              Scrollbar(
+                controller: _scrollController,
+                child: ListView.separated(
+                  controller: _scrollController,
+                  padding: const EdgeInsets.only(
+                    top: Sizes.size10,
+                    bottom: Sizes.size96 + Sizes.size28,
+                    left: Sizes.size16,
+                    right: Sizes.size16,
+                  ),
+                  separatorBuilder: (context, index) => Gaps.v20,
+                  itemCount: 10,
+                  itemBuilder: (context, index) => Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const CircleAvatar(
+                        radius: 18,
+                        child: Text('DH'),
+                      ),
+                      Gaps.h10,
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Donghyun',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: Sizes.size14,
+                                  color: Colors.grey.shade500),
+                            ),
+                            Gaps.v5,
+                            const Text(
+                              'Thats very sound good idea!Thats very sound good idea!Thats very sound good idea!',
+                            ),
+                          ],
+                        ),
+                      ),
+                      Gaps.h10,
+                      Column(
                         children: [
-                          Text(
-                            'Donghyun',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: Sizes.size14,
-                                color: Colors.grey.shade500),
+                          FaIcon(
+                            FontAwesomeIcons.heart,
+                            size: Sizes.size20,
+                            color: Colors.grey.shade500,
                           ),
-                          Gaps.v5,
-                          const Text(
-                            'Thats very sound good idea!Thats very sound good idea!Thats very sound good idea!',
+                          Gaps.v2,
+                          Text(
+                            '52.2K',
+                            style: TextStyle(
+                              color: Colors.grey.shade500,
+                            ),
                           ),
                         ],
                       ),
-                    ),
-                    Gaps.h10,
-                    Column(
-                      children: [
-                        FaIcon(
-                          FontAwesomeIcons.heart,
-                          size: Sizes.size20,
-                          color: Colors.grey.shade500,
-                        ),
-                        Gaps.v2,
-                        Text(
-                          '52.2K',
-                          style: TextStyle(
-                            color: Colors.grey.shade500,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
               Positioned(

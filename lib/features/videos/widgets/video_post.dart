@@ -85,6 +85,10 @@ class _VideoPostState extends State<VideoPost>
       // only one video play
       _videoPlayerController.play();
     }
+    // 모든 스크린은 OffStage를 따르지만 video 화면의 경우 다른 page 혹은 screen으로 넘어갔을 때 Video 정지가 필요.
+    if (_videoPlayerController.value.isPlaying && info.visibleFraction == 0) {
+      _togglePause();
+    }
   }
 
   void _togglePause() {
