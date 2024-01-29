@@ -17,6 +17,12 @@ class TicTokApp extends StatelessWidget {
       theme: ThemeData(
           scaffoldBackgroundColor: Colors.white,
           primaryColor: const Color(0xFFE9435A),
+          //모든 TextFieldCursor 색을 변경하기 위해 아래 설정.
+          textSelectionTheme: const TextSelectionThemeData(
+            cursorColor: Color(
+              0xFFE9435A,
+            ),
+          ),
           appBarTheme: const AppBarTheme(
               foregroundColor: Colors.black,
               backgroundColor: Colors.white,
@@ -26,7 +32,7 @@ class TicTokApp extends StatelessWidget {
                 fontSize: Sizes.size16 + Sizes.size2,
                 fontWeight: FontWeight.w600,
               ))),
-      home: MainNavigationScreen(),
+      home: const MainNavigationScreen(),
     );
   }
 }
