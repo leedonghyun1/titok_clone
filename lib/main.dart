@@ -23,6 +23,10 @@ class TicTokApp extends StatelessWidget {
               0xFFE9435A,
             ),
           ),
+          // click 시 splash action 삭제
+          splashColor: Colors.transparent,
+          // long-click 시 splash action 삭제
+          highlightColor: Colors.transparent,
           appBarTheme: const AppBarTheme(
               foregroundColor: Colors.black,
               backgroundColor: Colors.white,
