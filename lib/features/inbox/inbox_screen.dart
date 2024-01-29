@@ -24,17 +24,57 @@ class InboxScreen extends StatelessWidget {
         ],
       ),
       body: ListView(
-        children: const [
+        children: [
           ListTile(
-            title: Text(
+            onTap: () {},
+            title: const Text(
               'Activity',
               style: TextStyle(
                 fontWeight: FontWeight.w600,
+                fontSize: Sizes.size16,
               ),
             ),
-            trailing: FaIcon(
+            trailing: const FaIcon(
               FontAwesomeIcons.chevronRight,
-              size: Sizes.size16,
+              size: Sizes.size14,
+              color: Colors.black,
+            ),
+          ),
+          //원래는 ListView.Builder로 List를 나눠줘야 하지만 itemBuilder를 생성해야 하기 때문에 일단 container로 대체. 추후 변경 예정.
+          Container(
+            height: Sizes.size1,
+            color: Colors.grey.shade100,
+          ),
+          ListTile(
+            leading: Container(
+              width: Sizes.size48,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.blue,
+              ),
+              child: const Center(
+                child: FaIcon(
+                  FontAwesomeIcons.users,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+            title: const Text(
+              'New followers',
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: Sizes.size16,
+              ),
+            ),
+            subtitle: const Text(
+              'Message from fllowers will appear here',
+              style: TextStyle(
+                fontSize: Sizes.size14,
+              ),
+            ),
+            trailing: const FaIcon(
+              FontAwesomeIcons.chevronRight,
+              size: Sizes.size14,
               color: Colors.black,
             ),
           ),
