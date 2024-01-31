@@ -3,12 +3,25 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:titok_clone/constants/sizes.dart';
 import 'package:titok_clone/features/inbox/activity_screen.dart';
+import 'package:titok_clone/features/inbox/chats_screen.dart';
 
-class InboxScreen extends StatelessWidget {
+class InboxScreen extends StatefulWidget {
   const InboxScreen({super.key});
 
-  void _onDmPressed() {}
-  void _onActivityScreen(BuildContext context) {
+  @override
+  State<InboxScreen> createState() => _InboxScreenState();
+}
+
+class _InboxScreenState extends State<InboxScreen> {
+  void _onDmPressed() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const ChatsScreen(),
+      ),
+    );
+  }
+
+  void _onActivityScreen() {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => const ActivityScreen(),
@@ -34,7 +47,9 @@ class InboxScreen extends StatelessWidget {
       body: ListView(
         children: [
           ListTile(
-            onTap: () => _onActivityScreen(context),
+            // statful로 호출하기 때문에 context를 넘겨줄 필요가 없음.
+            // 일반적으로 stateless가 코드가 사용하기 좋음.
+            onTap: _onActivityScreen,
             title: const Text(
               'Activity',
               style: TextStyle(

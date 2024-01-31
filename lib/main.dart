@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:titok_clone/constants/sizes.dart';
 import 'package:titok_clone/features/inbox/activity_screen.dart';
+import 'package:titok_clone/features/main_navigation/main_navigation_screen.dart';
 
 void main() {
   runApp(const TicTokApp());
@@ -36,7 +37,7 @@ class TicTokApp extends StatelessWidget {
                 fontSize: Sizes.size16 + Sizes.size2,
                 fontWeight: FontWeight.w600,
               ))),
-      home: const ActivityScreen(),
+      home: const MainNavigationScreen(),
     );
   }
 }
