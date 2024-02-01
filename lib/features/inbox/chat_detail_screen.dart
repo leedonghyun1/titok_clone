@@ -1,3 +1,6 @@
+// code challenge : Avatar Circle 에 상태 아이콘 넣ㅣ
+// Bottom Navigatrion의 Text Fielid와 아이콘 넣기
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:titok_clone/constants/gaps.dart';
@@ -51,53 +54,75 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
           ),
         ),
       ),
-      body: Stack(children: [
-        ListView.separated(
-          padding: const EdgeInsets.symmetric(
-            vertical: Sizes.size14,
-            horizontal: Sizes.size14,
+      body: Stack(
+        children: [
+          ListView.separated(
+            padding: const EdgeInsets.symmetric(
+              vertical: Sizes.size14,
+              horizontal: Sizes.size14,
+            ),
+            itemBuilder: (context, index) {
+              // true is me!
+              final isMine = index % 2 == 0;
+              return Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment:
+                    isMine ? MainAxisAlignment.end : MainAxisAlignment.start,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(
+                      Sizes.size14,
+                    ),
+                    decoration: BoxDecoration(
+                      color:
+                          isMine ? Colors.blue : Theme.of(context).primaryColor,
+                      borderRadius: BorderRadius.only(
+                        topLeft: const Radius.circular(Sizes.size20),
+                        topRight: const Radius.circular(Sizes.size20),
+                        bottomLeft: Radius.circular(
+                          isMine ? Sizes.size20 : Sizes.size5,
+                        ),
+                        bottomRight: Radius.circular(
+                          !isMine ? Sizes.size20 : Sizes.size5,
+                        ),
+                      ),
+                    ),
+                    child: const Text(
+                      "This is a messages!!!",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: Sizes.size16,
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            },
+            separatorBuilder: (context, index) => Gaps.v10,
+            itemCount: 10,
           ),
-          itemBuilder: (context, index) {
-            // true is me!
-            final isMine = index % 2 == 0;
-            return Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment:
-                  isMine ? MainAxisAlignment.end : MainAxisAlignment.start,
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(
-                    Sizes.size14,
+          Positioned(
+            bottom: 0,
+            width: MediaQuery.of(context).size.width,
+            child: BottomAppBar(
+              color: Colors.grey.shade50,
+              child: Row(
+                children: [
+                  const Expanded(
+                    child: TextField(),
                   ),
-                  decoration: BoxDecoration(
-                    color:
-                        isMine ? Colors.blue : Theme.of(context).primaryColor,
-                    borderRadius: BorderRadius.only(
-                      topLeft: const Radius.circular(Sizes.size20),
-                      topRight: const Radius.circular(Sizes.size20),
-                      bottomLeft: Radius.circular(
-                        isMine ? Sizes.size20 : Sizes.size5,
-                      ),
-                      bottomRight: Radius.circular(
-                        !isMine ? Sizes.size20 : Sizes.size5,
-                      ),
+                  Gaps.h20,
+                  Container(
+                    child: const FaIcon(
+                      FontAwesomeIcons.paperPlane,
                     ),
                   ),
-                  child: const Text(
-                    "This is a messages!!!",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: Sizes.size16,
-                    ),
-                  ),
-                ),
-              ],
-            );
-          },
-          separatorBuilder: (context, index) => Gaps.v10,
-          itemCount: 10,
-        )
-      ]),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
