@@ -1,3 +1,5 @@
+// 사진 중에 Stack을 이용해서 사진 위에 Positioned 한 아이콘과 텍스트를 추가.
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:titok_clone/constants/gaps.dart';
@@ -233,80 +235,24 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             GridView.builder(
               keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
               itemCount: 20,
-              padding: const EdgeInsets.symmetric(
-                horizontal: Sizes.size5,
-                vertical: Sizes.size20,
-              ),
+              padding: EdgeInsets.zero,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: Sizes.size10,
-                mainAxisSpacing: Sizes.size10,
-                childAspectRatio: 9 / 21,
+                crossAxisCount: 3,
+                crossAxisSpacing: Sizes.size2,
+                mainAxisSpacing: Sizes.size2,
+                childAspectRatio: 9 / 16,
               ),
               itemBuilder: (context, index) => Column(
                 children: [
-                  Container(
-                    //Image가 Container를 넘어가기 때문에 끝에를 잘라줘야함.
-                    clipBehavior: Clip.hardEdge,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(
-                        Sizes.size5,
-                      ),
-                    ),
-                    child: AspectRatio(
-                      aspectRatio: 9 / 16,
-                      child: FadeInImage.assetNetwork(
-                        fit: BoxFit.cover,
-                        placeholder: "assets/images/placeholder.jpg",
-                        image:
-                            "https://cdn.pixabay.com/photo/2018/03/27/21/43/startup-3267505_640.jpg",
-                      ),
+                  AspectRatio(
+                    aspectRatio: 9 / 16,
+                    child: FadeInImage.assetNetwork(
+                      fit: BoxFit.cover,
+                      placeholder: "assets/images/placeholder.jpg",
+                      image:
+                          "https://cdn.pixabay.com/photo/2018/03/27/21/43/startup-3267505_640.jpg",
                     ),
                   ),
-                  Gaps.v10,
-                  const Text(
-                    "This is a very long caption for my tiktok that I'm uploading my video.",
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      fontSize: Sizes.size16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Gaps.v7,
-                  DefaultTextStyle(
-                    style: TextStyle(
-                      color: Colors.grey.shade600,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    child: Row(
-                      children: [
-                        const CircleAvatar(
-                          backgroundImage: NetworkImage(
-                            "https://avatars.githubusercontent.com/u/11994918?v=4",
-                          ),
-                        ),
-                        Gaps.h4,
-                        const Expanded(
-                          child: Text(
-                            "My avatar name is very long avatar name",
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                        Gaps.h4,
-                        FaIcon(
-                          FontAwesomeIcons.heart,
-                          size: Sizes.size14,
-                          color: Colors.grey.shade600,
-                        ),
-                        Gaps.h2,
-                        const Text(
-                          "2.5M",
-                        ),
-                      ],
-                    ),
-                  )
                 ],
               ),
             ),
