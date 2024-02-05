@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:titok_clone/constants/sizes.dart';
-import 'package:titok_clone/features/inbox/activity_screen.dart';
 import 'package:titok_clone/features/main_navigation/main_navigation_screen.dart';
 
 void main() {
