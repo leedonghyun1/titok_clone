@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:titok_clone/constants/gaps.dart';
@@ -51,8 +52,11 @@ class _VideoPostState extends State<VideoPost>
     // If video will be finishted do not go to forwarnd.
     // Video looping when video is finishing.
     await _videoPlayerController.setLooping(true);
-    setState(() {});
+    if (kIsWeb) {
+      _videoPlayerController.setVolume(0);
+    }
     _videoPlayerController.addListener(_onVideoChange);
+    setState(() {});
   }
 
   @override

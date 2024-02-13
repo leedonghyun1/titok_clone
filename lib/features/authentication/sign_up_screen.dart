@@ -32,81 +32,113 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: Sizes.size40,
-          ),
-          child: Column(
-            children: [
-              Gaps.v80,
-              const Text(
-                'Sign up for TikTok',
-                style: TextStyle(
-                  fontSize: Sizes.size28,
-                  fontWeight: FontWeight.w800,
-                ),
+    return OrientationBuilder(
+      builder: (context, orientation) {
+        return Scaffold(
+          body: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: Sizes.size40,
               ),
-              Gaps.v20,
-              const Text(
-                'Create a profile, follow other accounts, make your own videos, and more.',
-                style: TextStyle(
-                  fontSize: Sizes.size16,
-                  color: Colors.black45,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              Gaps.v40,
-              GestureDetector(
-                onTap: () => _onEmailTap(context),
-                child: const AuthButton(
-                  icon: Icon(
-                    CupertinoIcons.person,
+              child: Column(
+                children: [
+                  Gaps.v80,
+                  const Text(
+                    'Sign up for TikTok',
+                    style: TextStyle(
+                      fontSize: Sizes.size28,
+                      fontWeight: FontWeight.w800,
+                    ),
                   ),
-                  text: 'Use Email & Password',
-                ),
-              ),
-              Gaps.v14,
-              const AuthButton(
-                icon: Icon(
-                  CupertinoIcons.tv,
-                ),
-                text: 'Continue with Apple',
-              ),
-            ],
-          ),
-        ),
-      ),
-      bottomNavigationBar: BottomAppBar(
-        height: 100,
-        color: Colors.grey.shade100,
-        elevation: 3,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: Sizes.size20,
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text(
-                "Already have an account?",
-              ),
-              Gaps.h10,
-              GestureDetector(
-                onTap: () => _onLoginTap(context),
-                child: Text(
-                  'Log In',
-                  style: TextStyle(
-                    color: Theme.of(context).primaryColor,
-                    fontWeight: FontWeight.w700,
+                  Gaps.v20,
+                  const Text(
+                    'Create a profile, follow other accounts, make your own videos, and more.',
+                    style: TextStyle(
+                      fontSize: Sizes.size16,
+                      color: Colors.black45,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
-                ),
+                  Gaps.v40,
+                  if (orientation == Orientation.portrait) ...[
+                    GestureDetector(
+                      onTap: () => _onEmailTap(context),
+                      child: const AuthButton(
+                        icon: Icon(
+                          CupertinoIcons.person,
+                        ),
+                        text: 'Use Email & Password',
+                      ),
+                    ),
+                    Gaps.v14,
+                    const AuthButton(
+                      icon: Icon(
+                        CupertinoIcons.tv,
+                      ),
+                      text: 'Continue with Apple',
+                    ),
+                  ],
+                  if (orientation == Orientation.landscape)
+                    Row(
+                      children: [
+                        //Row 안에 있으면 FractionallSizedBox 가 되기 때문에 Expanded로 감싸줘야함.
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () => _onEmailTap(context),
+                            child: const AuthButton(
+                              icon: Icon(
+                                CupertinoIcons.person,
+                              ),
+                              text: 'Use Email & Password',
+                            ),
+                          ),
+                        ),
+                        Gaps.h14,
+                        const Expanded(
+                          child: AuthButton(
+                            icon: Icon(
+                              CupertinoIcons.tv,
+                            ),
+                            text: 'Continue with Apple',
+                          ),
+                        ),
+                      ],
+                    )
+                ],
               ),
-            ],
+            ),
           ),
-        ),
-      ),
+          bottomNavigationBar: BottomAppBar(
+            height: 100,
+            color: Colors.grey.shade100,
+            elevation: 3,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: Sizes.size20,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    "Already have an account?",
+                  ),
+                  Gaps.h10,
+                  GestureDetector(
+                    onTap: () => _onLoginTap(context),
+                    child: Text(
+                      'Log In',
+                      style: TextStyle(
+                        color: Theme.of(context).primaryColor,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }
