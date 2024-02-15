@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:titok_clone/constants/sizes.dart';
 import 'package:titok_clone/features/authentication/sign_up_screen.dart';
-import 'package:titok_clone/features/main_navigation/main_navigation_screen.dart';
 
 void main() async {
   //bind, flutter engine과 플랫폼을 컴파일하기 전에 sync한 후에
