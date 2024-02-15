@@ -1,4 +1,5 @@
 // 사진 중에 Stack을 이용해서 사진 위에 Positioned 한 아이콘과 텍스트를 추가.
+// code challenge : web으로 보았을 때 보기 좋게 layout 정리
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

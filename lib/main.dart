@@ -26,29 +26,38 @@ class TicTokApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'TikTok Clone',
+      themeMode: ThemeMode.system,
       theme: ThemeData(
-          scaffoldBackgroundColor: Colors.white,
-          primaryColor: const Color(0xFFE9435A),
-          //모든 TextFieldCursor 색을 변경하기 위해 아래 설정.
-          textSelectionTheme: const TextSelectionThemeData(
-            cursorColor: Color(
-              0xFFE9435A,
-            ),
+        brightness: Brightness.light,
+        scaffoldBackgroundColor: Colors.white,
+        primaryColor: const Color(0xFFE9435A),
+        //모든 TextFieldCursor 색을 변경하기 위해 아래 설정.
+        textSelectionTheme: const TextSelectionThemeData(
+          cursorColor: Color(
+            0xFFE9435A,
           ),
-          // click 시 splash action 삭제
-          splashColor: Colors.transparent,
-          // long-click 시 splash action 삭제
-          highlightColor: Colors.transparent,
-          appBarTheme: const AppBarTheme(
-              foregroundColor: Colors.black,
-              backgroundColor: Colors.white,
-              elevation: 0,
-              titleTextStyle: TextStyle(
-                color: Colors.black,
-                fontSize: Sizes.size16 + Sizes.size2,
-                fontWeight: FontWeight.w600,
-              ))),
-      home: const MainNavigationScreen(),
+        ),
+        // click 시 splash action 삭제
+        splashColor: Colors.transparent,
+        // long-click 시 splash action 삭제
+        highlightColor: Colors.transparent,
+        appBarTheme: const AppBarTheme(
+          foregroundColor: Colors.black,
+          backgroundColor: Colors.white,
+          elevation: 0,
+          titleTextStyle: TextStyle(
+            color: Colors.black,
+            fontSize: Sizes.size16 + Sizes.size2,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+      darkTheme: ThemeData(
+        scaffoldBackgroundColor: Colors.black,
+        primaryColor: const Color(0xFFE9435A),
+        brightness: Brightness.dark,
+      ),
+      home: const SignUpScreen(),
     );
   }
 }
