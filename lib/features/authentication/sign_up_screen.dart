@@ -112,9 +112,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
           ),
           bottomNavigationBar: BottomAppBar(
-            height: 100,
-            color: Colors.grey.shade100,
-            elevation: 3,
+            color: isDarkMode(context)
+                ? Colors.grey.shade900
+                : Colors.grey.shade50,
+            elevation: 2,
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 vertical: Sizes.size20,
